@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EKT AI — консультант</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="intro">
+      <p class="eyebrow">ЭЛЕКТРОКОМПЛЕКТ</p>
+      <h1>Найдём нужное оборудование за несколько секунд</h1>
+      <p>Загрузите спецификацию — ассистент сопоставит позиции, проверит риски, соберёт заказ по складам и подготовит корзину.</p>
+      <div class="benefits"><span>Spec to Cart</span><span>Контроль рисков</span><span>План по складам</span></div>
+    </section>
+    <section class="chat-shell">
+      <header class="chat-header">
+        <div class="avatar">AI</div>
+        <div><strong>EKT консультант</strong><small><i></i> Каталог подключён</small></div>
+        <a id="cartLink" class="cart-link" href="/cart.html">Корзина <b id="cartCount">0</b></a>
+      </header>
+      <div id="messages" class="messages" aria-live="polite">
+        <article class="message assistant"><div>Здравствуйте! Найду товар по названию или артикулу, проверю остаток и предложу аналог.</div></article>
+      </div>
+      <div id="fileChip" class="file-chip hidden"></div>
+      <form id="chatForm" class="composer">
+        <label class="attach" title="Spec to Cart: PDF, DOCX, XLSX или изображение">＋<input id="fileInput" type="file" accept=".pdf,.docx,.xlsx,.xlsm,.jpg,.jpeg,.png,.webp"></label>
+        <textarea id="messageInput" rows="1" placeholder="Например: товар 515291 есть в наличии?"></textarea>
+        <button id="sendButton" type="submit">Отправить</button>
+      </form>
+      <p id="modeLabel" class="mode-label"></p>
+    </section>
+  </main>
+  <dialog id="specDialog" class="spec-dialog">
+    <header class="spec-header">
+      <div><p class="eyebrow">PROCUREMENT CONTROL TOWER</p><h2>Spec to Cart</h2></div>
+      <button id="specClose" class="icon-button" aria-label="Закрыть">×</button>
+    </header>
+    <div id="specContent" class="spec-content"></div>
+    <footer class="spec-footer">
+      <span id="specSelection">0 позиций выбрано</span>
+      <button id="specPrepare" class="primary" disabled>Подготовить корзину</button>
+    </footer>
+  </dialog>
+  <script src="/static/app.js" defer></script>
+</body>
+</html>

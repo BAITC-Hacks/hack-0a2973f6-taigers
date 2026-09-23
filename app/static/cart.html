@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Корзина EKT</title><link rel="stylesheet" href="/static/styles.css"></head>
+<body><main class="cart-page"><a href="/">← Вернуться к консультанту</a><h1>Ваша корзина</h1>
+<div id="cartItems"></div><div class="cart-total">Итого: <strong id="cartTotal">0 ₸</strong></div>
+<p class="demo-note">Демонстрационная корзина. Для оформления заказа подключите API корзины ekt.kz.</p></main>
+<script>
+const p=new URLSearchParams(location.search);const s=p.get('session')||localStorage.getItem('ekt_session');
+fetch('/api/cart?session_id='+encodeURIComponent(s||'')).then(r=>r.json()).then(c=>{const root=document.querySelector('#cartItems');
+root.innerHTML=c.items.length?c.items.map(x=>`<article class="cart-row"><div><strong>${esc(x.name)}</strong><small>${esc(x.article)}</small></div><span>${x.quantity} × ${money(x.unit_price)}</span><b>${money(x.total)}</b></article>`).join(''):'<p>Корзина пока пуста.</p>';
+document.querySelector('#cartTotal').textContent=money(c.total)});function money(n){return new Intl.NumberFormat('ru-RU').format(n)+' ₸'}function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+</script></body></html>
